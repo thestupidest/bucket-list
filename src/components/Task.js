@@ -30,14 +30,17 @@ const Task = ({item, deleteTask, toggleTask, updateTask}) => {
 
     const _onSubmitEditing = () => {
         if (isEditing) {
-            const editedTask = Object.asing({},item,{text});
+            const editedTask = Object.assign({},item,{text});
             setIsEditing(false);
             updateTask(editedTask);
         }
     };
-
-    const _onBlur = () => (isEditing ? setIsEditing(false) : setText(item.text));
-
+    const _onBlur = () => {
+        if (isEditing) {
+            setIsEditing(false);
+            setText(item.text);
+        }
+    };
 
     return isEditing ? (
         <Input

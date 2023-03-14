@@ -35,15 +35,6 @@ const App = () => {
         '2': { id: '2', text: '나라 세개 여행', completed: false },
         '3': { id: '3', text: '도서 1권 읽기', completed: false },
     });
-
-    const _saveTasks = async tasks => {
-        try {
-            await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
-              setTasks(tasks);
-        } catch (e) {
-              console.error(e);
-        }
-    };
    
     const _addTask = () => {
         const ID = Date.now().toString();
@@ -51,24 +42,24 @@ const App = () => {
            [ID]: { id: ID, text: newTask, completed: false },
         };
         setNewTask('');
-        _saveTasks({ ...tasks, ...newTaskObject });
+        setTasks({ ...tasks, ...newTaskObject });
     };
 
     const _deleteTask = id => {
         const currentTasks = Object.assign({},tasks);
         delete currentTasks[id];
-        _saveTasks(currentTasks);
+        setTasks(currentTasks);
     };
     const _toggleTask = id => {
         const currentTasks = Object.assign({},tasks);
         currentTasks[id]['completed'] = !currentTasks[id]['completed'];
-        _saveTasks(currentTasks);
+        setTasks(currentTasks);
     };
 
     const _updateTask = item => {
-        const currentTasks = Object.assign({},tasks);
+        const currentTasks = {...tasks };
         currentTasks[item.id] = item;
-        _saveTasks(currentTasks);
+        setTasks(currentTasks);
       };
     
 

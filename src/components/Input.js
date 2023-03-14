@@ -47,4 +47,4 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
         onBlur: PropTypes.func.isRequired,
     };
 
-    export default Input;
+export default Input;
